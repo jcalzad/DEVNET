@@ -1,0 +1,11 @@
+Git architecture is composed of several different components:
+
+    Remote repository: A remote repository is where the files of the project reside, and it is also from where all other local copies are pulled. It can be stored on an internal private server or hosted on a public repository such as GitHub, GitLab, or BitBucket.
+
+    Local repository: A local repository is where snapshots, or commits, are stored on the local machine of each individual. 
+
+    Staging area: The staging area is where all the changes you actually want to perform are placed. You, as a project member, decide which files Git should track. This is an intermediary storage area for items to be synchronized (changes and new items).
+
+    Working directory: A working directory is a directory that is controlled by Git. Where you store source code files, binaries, images, documentation, and whatever else you need. Git will track differences between your working directory and local repository, and between your local repository and the remote repository.
+
+
