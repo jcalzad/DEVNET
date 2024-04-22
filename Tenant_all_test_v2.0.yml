@@ -1,0 +1,88 @@
+---
+- name: ENSURE APPLICATION CONFIGURATION EXISTS
+  hosts: apic
+  connection: local
+  gather_facts: False
+  vars_prompt:
+    - name: "tenant"
+      prompt: "What would you like to name your Tenant?"
+      private: no
+    - name: "vrf"
+      prompt: "What VRF should we create for this tenant?"
+      private: no
+    - name: "bd"
+      prompt: "What BD should should we create for this VRF?"
+      private: no
+    - name: "ip"
+      prompt: "What IP for the Gateway?"
+      private: no
+    - name: "mask"
+      prompt: "What mask should we use?"
+      private: no
+    - name: "ap"
+      prompt: "What is the AP name?"
+      private: no
+    - name: "epg"
+      prompt: "What EPG do we associate to the AP and BD?"
+      private: no
+
+  vars:
+    apic_info: &apic_info
+      hostname: "{{ ansible_host }}"
+      username: "{{ ansible_user }}"
+      password: "{{ ansible_password }}"
+      validate_certs: False
+
+  tasks:
+    - name: ENSURE APPLICATIONS TENANT EXISTS
+      aci_tenant:
+        <<: *apic_info
+        state: "present"
+        tenant: "{{ tenant }}"
+        description: "Tenant Created Using Ansible"
+    
+    - name: Add a new VRF to a tenant
+      cisco.aci.aci_vrf:
+        <<: *apic_info
+        state: "present"
+        vrf: "{{ vrf }}"
+        tenant: "{{ tenant }}"
+
+    - name: Add Bridge Domain
+      cisco.aci.aci_bd:
+        <<: *apic_info
+        state: "present"
+        vrf: "{{ vrf }}"
+        tenant: "{{ tenant }}"
+        bd: "{{ bd }}"
+
+    - name: Create a subnet
+      cisco.aci.aci_bd_subnet:
+        <<: *apic_info
+        state: "present"
+        tenant: "{{ tenant }}"
+        bd: "{{ bd }}"
+        gateway: "{{ ip }}"
+        mask: "{{ mask }}"
+
+    - name: Add a new AP
+      cisco.aci.aci_ap:
+        <<: *apic_info
+        state: "present"
+        tenant: "{{ tenant }}"
+        ap: "{{ ap }}"
+        description: default ap
+
+    - name: Add a new EPG
+      cisco.aci.aci_epg:
+        <<: *apic_info
+        state: "present"
+        tenant: "{{ tenant }}"
+        ap: "{{ ap }}"
+        epg: "{{ epg }}"
+        bd: "{{ bd }}"
+
+
+
+
+
