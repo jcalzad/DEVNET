@@ -7,10 +7,6 @@ import time
 # username = "<username>"
 # password = "<password>"
 
-router_ip = "10.82.141.143"
-username = "admin"
-password = "cisco!123"
-
 
 # Command to run once you logged in
 command = "show module"
