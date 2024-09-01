@@ -25,9 +25,9 @@ interface:
   enabled: true
   ipv4:
     address:
-    - ip: 172.16.0.2
-      netmask: 255.255.255.0
-  name: GigabitEthernet2
+    - ip: 10.1.1.1
+      netmask: 255.255.255.255
+  name: GigabitEthernet1
 """
 
 # Write to new yaml file
