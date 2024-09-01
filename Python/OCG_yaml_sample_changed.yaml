@@ -1,0 +1,8 @@
+interface:
+  description: Wide Area Network
+  enabled: true
+  ipv4:
+    address:
+    - ip: 10.1.1.1
+      netmask: 255.255.255.255
+  name: GigabitEthernet1
