@@ -54,6 +54,8 @@ json_dict["interface"]["ipv4"]["address"][0]["netmask"] = "255.255.255.255"
 # print the updated json dictionary
 print(json_dict) # {'interface': {'name': 'GigabitEthernet1', 'description': 'Backup Link', 'enabled': True, 'ipv4': {'address': [{'ip': '10.1.1.1', 'netmask': '255.255.255.255'}]}}}
 
+# save updated json to a new file
+# could have specified the same file name and it would have
+# written to the original file
 with open("OCG_json_sample_changed.json", "w") as fh:
     json.dump(json_dict, fh, indent = 4)
-    
